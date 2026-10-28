@@ -53,7 +53,7 @@ export default function WaitlistForm() {
           <img src="/icons/confetti.png" className="w-[70px] mx-auto" alt="" />
           <h1 className="text-xl font-semibold text-center">Be first in line.</h1>
           <p className="text-sm text-muted-foreground text-center">
-            We&apos;ll notify you the moment we launch.
+          Join the waitlist and be the first to know when Jireh Health relaunches.
           </p>
         </div>
 
