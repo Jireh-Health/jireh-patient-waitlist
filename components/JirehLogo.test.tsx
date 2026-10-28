@@ -14,23 +14,19 @@ describe("JirehLogo", () => {
   })
 
   it("applies additional className", () => {
-    const { container } = render(<JirehLogo variant="dark" className="extra-class" />)
-    expect(container.querySelector("svg")).toHaveClass("extra-class")
+    render(<JirehLogo variant="dark" className="extra-class" />)
+    expect(screen.getByRole("img", { name: /jireh health logo/i })).toHaveClass("extra-class")
   })
 
-  it("dark variant has white fill paths", () => {
-    const { container } = render(<JirehLogo variant="dark" />)
-    const paths = container.querySelectorAll("path")
-    const fills = Array.from(paths).map((p) => p.getAttribute("fill"))
-    expect(fills).toContain("white")
-    expect(fills).toContain("#E79AFF")
+  it("dark variant uses the splash logo", () => {
+    render(<JirehLogo variant="dark" />)
+    const img = screen.getByRole("img", { name: /jireh health logo/i })
+    expect(img).toHaveAttribute("src", "/icons/full-logo-splash.svg")
   })
 
-  it("light variant has #B325FF fill paths", () => {
-    const { container } = render(<JirehLogo variant="light" />)
-    const paths = container.querySelectorAll("path")
-    const fills = Array.from(paths).map((p) => p.getAttribute("fill"))
-    expect(fills).toContain("#B325FF")
-    expect(fills).toContain("#DFACFF")
+  it("light variant uses the full logo", () => {
+    render(<JirehLogo variant="light" />)
+    const img = screen.getByRole("img", { name: /jireh health logo/i })
+    expect(img).toHaveAttribute("src", "/icons/full-logo.svg")
   })
 })
