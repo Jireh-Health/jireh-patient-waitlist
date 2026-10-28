@@ -98,8 +98,8 @@ export default function SplashCarousel() {
   }
 
   return (
-    <div className="min-h-screen bg-muted sm:flex sm:items-center sm:justify-center sm:p-8">
-    <div className="flex flex-col h-screen sm:h-[85vh] sm:max-h-[780px] sm:w-full sm:max-w-sm sm:rounded-3xl sm:overflow-hidden sm:shadow-2xl bg-neutral-900 text-white">
+    <div className="min-h-screen bg-muted flex justify-center">
+    <div className="flex flex-col h-screen w-full sm:max-w-sm bg-neutral-900 text-white">
       {/* Header */}
       <header className="flex items-center justify-center p-3 shrink-0">
         <JirehLogo variant="dark" />
