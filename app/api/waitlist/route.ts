@@ -23,11 +23,12 @@ export async function POST(req: NextRequest): Promise<Response> {
     })
 
   if (dbError) {
+    console.error("Supabase insert error:", JSON.stringify(dbError))
     return NextResponse.json({ error: "Failed to save to waitlist" }, { status: 500 })
   }
 
   const { error: emailError } = await resendClient.emails.send({
-    from: "Jireh Health <noreply@jireh-health.com>",
+    from: process.env.RESEND_FROM_EMAIL ?? "Jireh Health <onboarding@resend.dev>",
     to: process.env.NOTIFICATION_EMAIL!,
     subject: "New patient waitlist sign-up",
     text: `Name: ${firstName} ${lastName}\nPhone: ${phone}`,
