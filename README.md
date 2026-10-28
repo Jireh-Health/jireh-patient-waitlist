@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jireh Patient Waitlist
 
-## Getting Started
+A Next.js application for managing patient waitlists with Supabase and Resend email notifications.
 
-First, run the development server:
+## Project
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This project manages patient waitlist signups with secure authentication and email notifications. Built with Next.js, TypeScript, Tailwind CSS, and integrated with Supabase for data persistence and Resend for email delivery.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Jireh-Health/jireh-patient-waitlist.git
+   cd jireh-patient-waitlist
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Copy `.env.example` to `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
 
-## Learn More
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Supabase setup
 
-## Deploy on Vercel
+1. Create a new Supabase project at [supabase.com](https://supabase.com)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. In the SQL Editor, run the schema from `supabase/schema.sql`:
+   ```sql
+   create table if not exists patient_waitlist (
+     id uuid primary key default gen_random_uuid(),
+     first_name text not null,
+     last_name  text not null,
+     phone      text not null,
+     consented_at timestamptz not null,
+     created_at   timestamptz not null default now()
+   );
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Copy your Supabase URL and anon key from the project settings and paste them into `.env.local`:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+   ```
+
+## Resend setup
+
+1. Create a Resend account at [resend.com](https://resend.com)
+
+2. Generate an API key in your Resend dashboard
+
+3. Set the API key and notification email in `.env.local`:
+   ```
+   RESEND_API_KEY=your-api-key
+   NOTIFICATION_EMAIL=your-notification-email@example.com
+   ```
+
+## Deployment
+
+Deploy to Vercel:
+
+1. Connect your GitHub repository to Vercel at [vercel.com/new](https://vercel.com/new)
+
+2. Set the following environment variables in your Vercel project settings:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `RESEND_API_KEY`
+   - `NOTIFICATION_EMAIL`
+
+3. Set your production domain to `app.jireh-health.com` in the Vercel project domains settings
+
+4. Deploy by pushing to your main branch
