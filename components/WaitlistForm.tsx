@@ -103,7 +103,7 @@ export default function WaitlistForm() {
               className="mt-0.5 shrink-0"
             />
             <label htmlFor="consent" className="text-sm leading-snug cursor-pointer">
-              I consent to being contacted about the Jireh Health waitlist.
+              I agree to be contacted by SMS when Jireh Health launches and only for that purpose.
             </label>
           </div>
 
