@@ -18,7 +18,7 @@ export default function WaitlistForm() {
   const {
     register,
     handleSubmit,
-    formState: { isValid, isSubmitting },
+    formState: { isValid, isSubmitting, errors },
   } = useForm<PatientWaitlistData>({
     resolver: zodResolver(patientWaitlistSchema),
     mode: "onChange",
@@ -92,6 +92,9 @@ export default function WaitlistForm() {
                 {...register("phone")}
               />
             </div>
+            {errors.phone && (
+              <p className="text-sm text-destructive">{errors.phone.message}</p>
+            )}
           </div>
 
           <div className="flex items-start gap-2">
