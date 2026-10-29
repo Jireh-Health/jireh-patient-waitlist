@@ -18,7 +18,7 @@ export default function WaitlistForm() {
   const {
     register,
     handleSubmit,
-    formState: { isValid, isSubmitting, errors },
+    formState: { isSubmitting, errors },
   } = useForm<PatientWaitlistData>({
     resolver: zodResolver(patientWaitlistSchema),
     mode: "onChange",
@@ -116,7 +116,7 @@ export default function WaitlistForm() {
 
           <Button
             type="submit"
-            disabled={!consent || !isValid || isSubmitting}
+            disabled={!consent || isSubmitting}
             className="w-full"
           >
             Submit
